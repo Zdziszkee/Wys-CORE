@@ -16,6 +16,6 @@ public class WhereAmICmd extends BaseCommand {
 
     @Default
     public void onDefault(Player player) {
-        commandConfiguration.getWhereAmICommandMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&', s.replace(Placeholders.SERVER, player.getServer().getName()))));
+        commandConfiguration.getWhereAmICommandMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&', s.replace(Placeholders.SERVER, player.getServer().getServerName()))));
     }
 }

@@ -19,19 +19,20 @@ public class FlyCommand extends BaseCommand {
 
     @Default
     @CommandPermission(CommandPermissions.COMMAND_FLY)
-    public void onDefault(Player player) {
-        player.setAllowFlight(!player.getAllowFlight());
-    }
-
-    @Default
-    @CommandPermission(CommandPermissions.COMMAND_GIVE_FLY)
     public void onDefault(CommandSender commandSender, String[] args) {
-        if (args.length != 1) return;
-        Player player = Bukkit.getPlayer(args[0]);
-        if (player == null) {
-            commandConfiguration.getPlayerNotFoundMessage().forEach(s -> commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', s)));
-            return;
+        if (args.length == 0) {
+            if (!(commandSender instanceof Player)) return;
+            Player player = (Player) commandSender;
+            player.setAllowFlight(!player.getAllowFlight());
         }
-        player.setAllowFlight(player.getAllowFlight());
+        if (args.length == 1) {
+            if (!commandSender.hasPermission(CommandPermissions.COMMAND_GIVE_FLY))return;
+            Player player = Bukkit.getPlayer(args[0]);
+            if (player == null) {
+                commandConfiguration.getPlayerNotFoundMessage().forEach(s -> commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', s)));
+                return;
+            }
+            player.setAllowFlight(player.getAllowFlight());
+        }
     }
 }

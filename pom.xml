@@ -52,6 +52,11 @@
             <version>32e62403f6</version>
             <scope>compile</scope>
         </dependency>
+            <dependency>
+                <groupId>org.mongodb</groupId>
+                <artifactId>mongodb-driver-legacy</artifactId>
+                <version>4.2.0</version>
+            </dependency>
     </dependencies>
     <build>
         <!--Tell maven what plugins we want to add and what they should do-->

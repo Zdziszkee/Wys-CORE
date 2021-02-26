@@ -17,19 +17,23 @@ import org.bukkit.entity.Player;
 public class PingCommand extends BaseCommand {
     private final CommandConfiguration commandConfiguration;
 
-    @Default
-    public void onDefault(Player player) {
-        int ping = ((CraftPlayer) (player)).getHandle().ping;
-        commandConfiguration.getPingCommandMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&', s.replace(Placeholders.AMOUNT, String.valueOf(ping)))));
-    }
 
     @Default
     public void onDefault(CommandSender commandSender, String[] args) {
-        if (args.length != 1) return;
-        Player player = Bukkit.getPlayer(args[0]);
-        if (player == null) return;
-        int ping = ((CraftPlayer) (player)).getHandle().ping;
-        commandConfiguration.getPingCommandMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&', s.replace(Placeholders.AMOUNT, String.valueOf(ping)))));
-
+        if (args.length == 0) {
+            if (!(commandSender instanceof Player)) return;
+            Player player = (Player) commandSender;
+            int ping = ((CraftPlayer) (player)).getHandle().ping;
+            commandConfiguration.getPingCommandMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&', s.replace(Placeholders.AMOUNT, String.valueOf(ping)))));
+        }
+        if (args.length == 1) {
+            Player player = Bukkit.getPlayer(args[0]);
+            if (player == null) {
+                commandConfiguration.getPlayerNotFoundMessage().forEach(s -> commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', s)));
+                return;
+            }
+            int ping = ((CraftPlayer) (player)).getHandle().ping;
+            commandConfiguration.getPingCommandMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&', s.replace(Placeholders.AMOUNT, String.valueOf(ping)))));
+        }
     }
 }

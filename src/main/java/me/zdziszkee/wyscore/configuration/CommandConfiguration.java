@@ -34,5 +34,7 @@ public class CommandConfiguration extends Config {
     private final List<String> selfTeleportingDisabledMessage = Collections.singletonList("Teleporting has been disabled");
     private final List<String> teleportingEnabledMessage = Collections.singletonList("Teleporting of %player% has been enabled");
     private final List<String> teleportingDisabledMessage = Collections.singletonList("Teleporting of %player% has been disabled");
+    private final List<String> youMustProvideANumberMessage = Collections.singletonList("You must provide a number!");
+    private final List<String> invalidMaterialMessage = Collections.singletonList("%input% is not a valid material");
 
 }

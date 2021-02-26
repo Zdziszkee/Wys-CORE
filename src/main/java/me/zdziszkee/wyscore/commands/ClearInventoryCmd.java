@@ -18,23 +18,26 @@ import org.bukkit.entity.Player;
 public class ClearInventoryCmd extends BaseCommand {
     private final CommandConfiguration commandConfiguration;
 
-    @Default
-    public void onDefault(Player player) {
-        player.getInventory().clear();
-        commandConfiguration.getSelfClearInventoryCommandMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&', s)));
-    }
 
     @Default
     public void onDefault(CommandSender commandSender, String[] args) {
-        if (args.length != 1) return;
-        Player target = Bukkit.getPlayer(args[0]);
-        if (target == null) {
-            commandConfiguration.getPlayerNotFoundMessage().forEach(s -> commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', s)));
-            return;
+        if (args.length == 0) {
+            if (!(commandSender instanceof Player)) return;
+            Player player = (Player) commandSender;
+            player.getInventory().clear();
+            commandConfiguration.getSelfClearInventoryCommandMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&', s)));
         }
-        target.getInventory().clear();
-        commandConfiguration.getClearInventoryCommandMessage().forEach(s -> target.sendMessage(ChatColor.translateAlternateColorCodes('&', s)));
+        if (args.length != 1) {
+            if (!commandSender.hasPermission(CommandPermissions.COMMAND_CLEAR_SOMEONE_INVENTORY))return;
+            Player target = Bukkit.getPlayer(args[0]);
+            if (target == null) {
+                commandConfiguration.getPlayerNotFoundMessage().forEach(s -> commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', s)));
+                return;
+            }
+            target.getInventory().clear();
+            commandConfiguration.getClearInventoryCommandMessage().forEach(s -> target.sendMessage(ChatColor.translateAlternateColorCodes('&', s)));
 
+        }
     }
 }
 
