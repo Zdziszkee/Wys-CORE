@@ -13,21 +13,22 @@ import org.bukkit.entity.Player;
 public class SpeedCmd extends BaseCommand {
 
     @Default
-    public void onDefault(Player player,String[] args){
-        if(args.length!=1)return;
-        if (!StringUtils.isNumeric(args[0]))return;
+    public void onDefault(Player player, String[] args) {
+        if (args.length != 1) return;
+        if (!StringUtils.isNumeric(args[0])) return;
         int value = Integer.parseInt(args[0]);
-        if(value>10||value<0)return;
+        if (value > 10 || value < 0) return;
         player.setFlySpeed(value);
     }
+
     @Default
-    public void onDefault(String[] args){
-        if(args.length!=2)return;
+    public void onDefault(String[] args) {
+        if (args.length != 2) return;
         Player player = Bukkit.getPlayer(args[1]);
-        if(player==null)return;
-        if (!StringUtils.isNumeric(args[0]))return;
+        if (player == null) return;
+        if (!StringUtils.isNumeric(args[0])) return;
         int value = Integer.parseInt(args[0]);
-        if(value>10||value<0)return;
+        if (value > 10 || value < 0) return;
         player.setFlySpeed(value);
     }
 }

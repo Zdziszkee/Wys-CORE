@@ -14,14 +14,14 @@ import org.bukkit.entity.Player;
 @CommandPermission(CommandPermissions.COMMAND_VANISH)
 public class VanishCmd extends BaseCommand {
     @Default
-    public void onDefault(Player player,String[] args){
-        if(args.length==0){
+    public void onDefault(Player player, String[] args) {
+        if (args.length == 0) {
             Bukkit.getOnlinePlayers().forEach(player::hidePlayer);
             return;
         }
-        if(args.length==1){
+        if (args.length == 1) {
             Player target = Bukkit.getPlayer(args[0]);
-            if(target==null)return;
+            if (target == null) return;
             Bukkit.getOnlinePlayers().forEach(target::hidePlayer);
 
         }

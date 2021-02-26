@@ -14,10 +14,10 @@ import org.bukkit.entity.Player;
 @CommandPermission(CommandPermissions.COMMAND_HEAL)
 public class HealCmd extends BaseCommand {
     @Default
-    public void onDefault(String[] args){
-        if(args.length!=1)return;
+    public void onDefault(String[] args) {
+        if (args.length != 1) return;
         Player player = Bukkit.getPlayer(args[0]);
-        if(player==null)return;
+        if (player == null) return;
         player.setHealth(player.getMaxHealth());
     }
 }

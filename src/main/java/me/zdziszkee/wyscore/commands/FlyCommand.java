@@ -16,18 +16,20 @@ import org.bukkit.entity.Player;
 @CommandAlias("fly")
 public class FlyCommand extends BaseCommand {
     private final CommandConfiguration commandConfiguration;
+
     @Default
     @CommandPermission(CommandPermissions.COMMAND_FLY)
-    public void onDefault(Player player){
+    public void onDefault(Player player) {
         player.setAllowFlight(!player.getAllowFlight());
     }
+
     @Default
     @CommandPermission(CommandPermissions.COMMAND_GIVE_FLY)
-    public void onDefault(CommandSender commandSender,String[] args){
-        if(args.length!=1)return;
+    public void onDefault(CommandSender commandSender, String[] args) {
+        if (args.length != 1) return;
         Player player = Bukkit.getPlayer(args[0]);
-        if(player==null){
-            commandConfiguration.getFlyCommandPlayerNotFoundMessage().forEach(s -> commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&',s)));
+        if (player == null) {
+            commandConfiguration.getPlayerNotFoundMessage().forEach(s -> commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', s)));
             return;
         }
         player.setAllowFlight(player.getAllowFlight());

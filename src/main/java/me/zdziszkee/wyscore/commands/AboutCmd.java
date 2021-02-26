@@ -13,8 +13,9 @@ import org.bukkit.entity.Player;
 @CommandAlias("about|?")
 public class AboutCmd extends BaseCommand {
     private final CommandConfiguration commandConfiguration;
+
     @Default
-    public void onDefault(Player player){
-        commandConfiguration.getAboutCommandMessage().forEach(s ->  player.sendMessage(ChatColor.translateAlternateColorCodes('&', s)));
+    public void onDefault(Player player) {
+        commandConfiguration.getAboutCommandMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&', s)));
     }
 }

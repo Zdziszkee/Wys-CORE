@@ -25,7 +25,7 @@ public class BuildCmd extends BaseCommand {
             commandConfiguration.getBuildCommandEnableMessage().forEach(s -> ChatColor.translateAlternateColorCodes('&', s));
         } else {
             buildCommandManager.addToPlayersWithBlockedBuilding(player);
-            commandConfiguration.getBuildCommandDisableMessage().forEach(s -> ChatColor.translateAlternateColorCodes('&',s));
+            commandConfiguration.getBuildCommandDisableMessage().forEach(s -> ChatColor.translateAlternateColorCodes('&', s));
         }
     }
 }

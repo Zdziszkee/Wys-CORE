@@ -13,7 +13,7 @@ import org.bukkit.Bukkit;
 @CommandAlias("flyall")
 public class FlyGiveAllCmd extends BaseCommand {
     @Default
-    public void onDefault(){
+    public void onDefault() {
         Bukkit.getOnlinePlayers().forEach(player -> player.setAllowFlight(true));
     }
 }

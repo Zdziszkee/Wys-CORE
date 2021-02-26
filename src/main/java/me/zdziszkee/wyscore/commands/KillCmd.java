@@ -12,15 +12,16 @@ import org.bukkit.entity.Player;
 public class KillCmd extends BaseCommand {
 
     @Default
-    public void onDefault(Player player){
+    public void onDefault(Player player) {
         player.setHealth(0);
     }
+
     @Default
     @CommandPermission(CommandPermissions.COMMAND_KILL)
-    public void onDefault(String[] args){
-        if(args.length!=1)return;
+    public void onDefault(String[] args) {
+        if (args.length != 1) return;
         Player player = Bukkit.getPlayer(args[0]);
-        if(player==null)return;
+        if (player == null) return;
         player.setHealth(0);
     }
 

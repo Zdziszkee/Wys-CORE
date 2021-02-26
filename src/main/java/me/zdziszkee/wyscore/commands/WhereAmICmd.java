@@ -13,8 +13,9 @@ import org.bukkit.entity.Player;
 @CommandAlias("whereami")
 public class WhereAmICmd extends BaseCommand {
     private final CommandConfiguration commandConfiguration;
+
     @Default
-    public  void onDefault(Player player){
-        commandConfiguration.getWhereAmICommandMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&',s.replace(Placeholders.SERVER,player.getServer().getName()))));
+    public void onDefault(Player player) {
+        commandConfiguration.getWhereAmICommandMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&', s.replace(Placeholders.SERVER, player.getServer().getName()))));
     }
 }

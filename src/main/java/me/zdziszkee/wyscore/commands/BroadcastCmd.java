@@ -17,10 +17,11 @@ import java.util.Arrays;
 @CommandAlias("broadcast|bc")
 public class BroadcastCmd extends BaseCommand {
     private final CommandConfiguration commandConfiguration;
+
     @Default
-    public void onDefault(String[] args){
+    public void onDefault(String[] args) {
         StringBuilder stringBuilder = new StringBuilder();
         Arrays.stream(args).forEach(s -> stringBuilder.append(s).append(" "));
-        Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',stringBuilder.toString()));
+        Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', stringBuilder.toString()));
     }
 }

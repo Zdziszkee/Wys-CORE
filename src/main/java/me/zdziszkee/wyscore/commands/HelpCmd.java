@@ -12,8 +12,9 @@ import org.bukkit.entity.Player;
 @CommandAlias("help")
 public class HelpCmd extends BaseCommand {
     private final CommandConfiguration commandConfiguration;
+
     @Default
-    public void onDefault(Player player){
-        commandConfiguration.getHelpCommandMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&',s)));
+    public void onDefault(Player player) {
+        commandConfiguration.getHelpCommandMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&', s)));
     }
 }

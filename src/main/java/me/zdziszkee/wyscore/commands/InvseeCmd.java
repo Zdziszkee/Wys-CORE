@@ -14,10 +14,10 @@ import org.bukkit.entity.Player;
 @CommandAlias("invsee|inventorysee")
 public class InvseeCmd extends BaseCommand {
     @Default
-    public void onDefault(Player player,String[] args){
-        if(args.length!=1)return;
+    public void onDefault(Player player, String[] args) {
+        if (args.length != 1) return;
         Player target = Bukkit.getPlayer(args[0]);
-        if(target==null)return;
+        if (target == null) return;
         player.openInventory(target.getInventory());
     }
 }

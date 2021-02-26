@@ -7,7 +7,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 
 @RequiredArgsConstructor
-public class BuildCommandListener implements Listener {
+public class BuildListener implements Listener {
     private final BuildCommandManager buildCommandManager;
 
     @EventHandler

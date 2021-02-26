@@ -12,8 +12,9 @@ import org.bukkit.entity.Player;
 @CommandAlias("bug")
 public class BugCmd extends BaseCommand {
     private final CommandConfiguration commandConfiguration;
+
     @Default
-    public void onDefault(Player player){
-        commandConfiguration.getBugCommandMessage().forEach(s ->  player.sendMessage(ChatColor.translateAlternateColorCodes('&', s)));
+    public void onDefault(Player player) {
+        commandConfiguration.getBugCommandMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&', s)));
     }
 }

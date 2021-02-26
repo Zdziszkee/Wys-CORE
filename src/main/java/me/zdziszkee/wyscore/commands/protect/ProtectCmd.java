@@ -19,28 +19,28 @@ public class ProtectCmd extends BaseCommand {
 
     @Default
     @CommandPermission(CommandPermissions.COMMAND_PROTECT)
-    public void onDefault(Player player){
+    public void onDefault(Player player) {
         if (protectedPlayersManager.isPlayerInProtectedPlayers(player)) {
             protectedPlayersManager.removePlayerFromProtectedPlayers(player);
-            commandConfiguration.getProtectCommandDisableMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&',s)));
-        }else {
+            commandConfiguration.getProtectCommandDisableMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&', s)));
+        } else {
             protectedPlayersManager.addPlayerToProtectedPlayers(player);
-            commandConfiguration.getProtectCommandEnableMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&',s)));
+            commandConfiguration.getProtectCommandEnableMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&', s)));
         }
     }
 
     @Default
     @CommandPermission(CommandPermissions.COMMAND_PROTECT_SOMEONE)
-    public void onDefault(String[] args){
-        if(args.length!=1)return;
+    public void onDefault(String[] args) {
+        if (args.length != 1) return;
         Player player = Bukkit.getPlayer(args[0]);
-        if(player==null)return;
+        if (player == null) return;
         if (protectedPlayersManager.isPlayerInProtectedPlayers(player)) {
             protectedPlayersManager.removePlayerFromProtectedPlayers(player);
-            commandConfiguration.getProtectCommandDisableMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&',s)));
-        }else {
+            commandConfiguration.getProtectCommandDisableMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&', s)));
+        } else {
             protectedPlayersManager.addPlayerToProtectedPlayers(player);
-            commandConfiguration.getProtectCommandEnableMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&',s)));
+            commandConfiguration.getProtectCommandEnableMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&', s)));
         }
     }
 }

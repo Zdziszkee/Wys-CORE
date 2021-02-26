@@ -15,10 +15,10 @@ import org.bukkit.inventory.ItemStack;
 @CommandAlias("giveall")
 public class GiveAllCmd extends BaseCommand {
     @Default
-    public void onDefault(String[] args){
-        if(args.length!=1)return;
+    public void onDefault(String[] args) {
+        if (args.length != 1) return;
         Material material = Material.getMaterial(args[0]);
-        if(material==null)return;
+        if (material == null) return;
         ItemStack itemStack = new ItemStack(material);
         Bukkit.getOnlinePlayers().forEach(player -> player.getInventory().addItem(itemStack));
     }

@@ -11,9 +11,10 @@ import org.bukkit.entity.Player;
 @RequiredArgsConstructor
 @CommandAlias("discord")
 public class DiscordCmd extends BaseCommand {
-   private final CommandConfiguration commandConfiguration;
+    private final CommandConfiguration commandConfiguration;
+
     @Default
-    public void onDefault(Player player){
-        commandConfiguration.getDiscordCommandMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&',s)));
+    public void onDefault(Player player) {
+        commandConfiguration.getDiscordCommandMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&', s)));
     }
 }
