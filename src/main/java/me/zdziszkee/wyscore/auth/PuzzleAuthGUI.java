@@ -67,7 +67,7 @@ public class PuzzleAuthGUI implements GUI {
 
     static {
         for (int i = 0; i < 15; i++) {
-            slotMap.put(inputSlotPool[i], patternSlotPool[i]);
+            slotMap.put(patternSlotPool[i], inputSlotPool[i]);
         }
     }
 
@@ -121,8 +121,9 @@ public class PuzzleAuthGUI implements GUI {
     }
 
     private boolean isPatternCorrect() {
-        for (int slot : playerInput) {
-            if (!containsThisSlot(slotMap.get(slot))) {
+
+        for (int randomFilledSlot : randomFilledSlots) {
+            if (!doesPlayerInputContainsSlot(slotMap.get(randomFilledSlot))) {
                 return false;
             }
         }
@@ -170,16 +171,14 @@ public class PuzzleAuthGUI implements GUI {
     }
 
     private void resetAuth() {
-        Arrays.fill(randomFilledSlots, -1);
+        Arrays.fill(playerInput, -1);
         generateRandomPattern();
 
     }
 
-    private boolean containsThisSlot(int slot) {
-        for (int randomFilledSlot : randomFilledSlots) {
-            if (randomFilledSlot == slot) {
-                return true;
-            }
+    private boolean doesPlayerInputContainsSlot(int slot){
+        for (int i : playerInput) {
+            if(slot==i)return  true;
         }
         return false;
     }

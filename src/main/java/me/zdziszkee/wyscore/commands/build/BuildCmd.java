@@ -22,10 +22,10 @@ public class BuildCmd extends BaseCommand {
         boolean canPlayerBuild = buildCommandManager.canPlayerBuild(player);
         if (!canPlayerBuild) {
             buildCommandManager.removeFromPlayersWithBlockedBuilding(player);
-            commandConfiguration.getBuildCommandEnableMessage().forEach(s -> ChatColor.translateAlternateColorCodes('&', s));
+            commandConfiguration.getBuildCommandEnableMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&', s)));
         } else {
             buildCommandManager.addToPlayersWithBlockedBuilding(player);
-            commandConfiguration.getBuildCommandDisableMessage().forEach(s -> ChatColor.translateAlternateColorCodes('&', s));
+            commandConfiguration.getBuildCommandDisableMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&', s)));
         }
     }
 }

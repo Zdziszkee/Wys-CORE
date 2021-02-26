@@ -106,8 +106,7 @@ public class PinPadAuthGUI implements GUI {
 
     private ItemStack[] getInventoryContents() {
         Inventory temp = Bukkit.createInventory(null, 54);
-        Bukkit.broadcastMessage(String.valueOf(generatedPin));
-            temp.setItem(4, pinPadAuthGUIConfiguration.getInformationHead().clone().replacePlaceHolder("%pin%", String.valueOf(generatedPin)).getItemStack());
+        temp.setItem(4, pinPadAuthGUIConfiguration.getInformationHead().clone().replacePlaceHolder("%pin%", String.valueOf(generatedPin)).getItemStack());
 
 
         temp.setItem(12, pinPadAuthGUIConfiguration.getOneNumberHead().getItemStack());
