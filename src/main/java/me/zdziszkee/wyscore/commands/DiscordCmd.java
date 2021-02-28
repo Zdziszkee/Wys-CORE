@@ -8,6 +8,8 @@ import me.zdziszkee.wyscore.configuration.CommandConfiguration;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
+import static me.zdziszkee.wyscore.utils.MessageUtil.sendMessage;
+
 @RequiredArgsConstructor
 @CommandAlias("discord")
 public class DiscordCmd extends BaseCommand {
@@ -15,6 +17,6 @@ public class DiscordCmd extends BaseCommand {
 
     @Default
     public void onDefault(Player player) {
-        commandConfiguration.getDiscordCommandMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&', s)));
+        commandConfiguration.getDiscordCommandMessage().forEach(s -> sendMessage(player,s));
     }
 }

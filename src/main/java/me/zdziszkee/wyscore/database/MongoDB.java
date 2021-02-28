@@ -5,11 +5,13 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 
 public class MongoDB {
     private final String databaseURI;
     private final String dataBaseName;
-
+    MongoCollection<Document> currencyCollection;
     public MongoDB(String databaseURI, String dataBaseName) {
         this.databaseURI = databaseURI;
         this.dataBaseName = dataBaseName;
@@ -18,6 +20,11 @@ public class MongoDB {
     public void connect(){
         MongoClient mongoClient = MongoClients.create(databaseURI);
         MongoDatabase mongoDatabase = mongoClient.getDatabase(dataBaseName);
-        MongoCollection<Document> mongoCollection = mongoDatabase.getCollection("currency");
+        currencyCollection = mongoDatabase.getCollection("currency");
+        Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Connected to mongodb!");
+    }
+
+    public MongoCollection<Document> getCurrencyCollection() {
+        return currencyCollection;
     }
 }

@@ -7,9 +7,12 @@ import co.aikar.commands.annotation.Default;
 import lombok.RequiredArgsConstructor;
 import me.zdziszkee.wyscore.configuration.CommandConfiguration;
 import me.zdziszkee.wyscore.permissions.CommandPermissions;
+import me.zdziszkee.wyscore.utils.Placeholders;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+
+import static me.zdziszkee.wyscore.utils.MessageUtil.sendMessage;
 
 @CommandAlias("tptoggle|tpt")
 @RequiredArgsConstructor
@@ -22,10 +25,10 @@ public class TeleportToggleCmd extends BaseCommand {
 
         if (teleportDisabledPlayersManager.isPlayerInPlayersWithBlockedTeleporting(player)) {
             teleportDisabledPlayersManager.removePlayerFromPlayersWithBlockedTeleporting(player);
-            commandConfiguration.getSelfTeleportingDisabledMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&',s)));
+            commandConfiguration.getSelfTeleportingDisabledMessage().forEach(s -> sendMessage(player,s));
         } else {
             teleportDisabledPlayersManager.addPlayerToPlayersWithBlockedTeleporting(player);
-            commandConfiguration.getSelfTeleportingEnabledMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&',s)));
+            commandConfiguration.getSelfTeleportingEnabledMessage().forEach(s -> sendMessage(player,s));
 
         }
     }
@@ -38,11 +41,11 @@ public class TeleportToggleCmd extends BaseCommand {
         if (target == null) return;
         if (teleportDisabledPlayersManager.isPlayerInPlayersWithBlockedTeleporting(target)) {
             teleportDisabledPlayersManager.removePlayerFromPlayersWithBlockedTeleporting(target);
-            commandConfiguration.getTeleportingDisabledMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&',s)));
+            commandConfiguration.getTeleportingDisabledMessage().forEach(s -> sendMessage(player,s.replace(Placeholders.PLAYER,target.getName())));
 
         } else {
             teleportDisabledPlayersManager.addPlayerToPlayersWithBlockedTeleporting(target);
-            commandConfiguration.getTeleportingEnabledMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&',s)));
+            commandConfiguration.getTeleportingEnabledMessage().forEach(s -> sendMessage(player,s.replace(Placeholders.PLAYER,target.getName())));
 
         }
     }

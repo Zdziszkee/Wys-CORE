@@ -8,6 +8,8 @@ import me.zdziszkee.wyscore.configuration.CommandConfiguration;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
+import static me.zdziszkee.wyscore.utils.MessageUtil.sendMessage;
+
 @CommandAlias("partner")
 @RequiredArgsConstructor
 public class PartnerCmd extends BaseCommand {
@@ -15,6 +17,6 @@ public class PartnerCmd extends BaseCommand {
 
     @Default
     public void onDefault(Player player) {
-        commandConfiguration.getPartnerCommandMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&', s)));
+        commandConfiguration.getPartnerCommandMessage().forEach(s -> sendMessage(player,s));
     }
 }

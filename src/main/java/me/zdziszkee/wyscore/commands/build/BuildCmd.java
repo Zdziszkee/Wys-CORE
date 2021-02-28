@@ -10,6 +10,8 @@ import me.zdziszkee.wyscore.permissions.CommandPermissions;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
+import static me.zdziszkee.wyscore.utils.MessageUtil.sendMessage;
+
 @CommandAlias("build")
 @RequiredArgsConstructor
 @CommandPermission(CommandPermissions.COMMAND_BUILD)
@@ -22,10 +24,10 @@ public class BuildCmd extends BaseCommand {
         boolean canPlayerBuild = buildCommandManager.canPlayerBuild(player);
         if (!canPlayerBuild) {
             buildCommandManager.removeFromPlayersWithBlockedBuilding(player);
-            commandConfiguration.getBuildCommandEnableMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&', s)));
+            commandConfiguration.getBuildCommandEnableMessage().forEach(s -> sendMessage(player,s));
         } else {
             buildCommandManager.addToPlayersWithBlockedBuilding(player);
-            commandConfiguration.getBuildCommandDisableMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&', s)));
+            commandConfiguration.getBuildCommandDisableMessage().forEach(s -> sendMessage(player,s));
         }
     }
 }

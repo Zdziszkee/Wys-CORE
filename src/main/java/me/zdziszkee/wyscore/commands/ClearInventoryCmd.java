@@ -12,6 +12,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import static me.zdziszkee.wyscore.utils.MessageUtil.sendMessage;
+
 @RequiredArgsConstructor
 @CommandPermission(CommandPermissions.COMMAND_CLEAR_INVENTORY)
 @CommandAlias("clearinventory|ci")
@@ -25,7 +27,7 @@ public class ClearInventoryCmd extends BaseCommand {
             if (!(commandSender instanceof Player)) return;
             Player player = (Player) commandSender;
             player.getInventory().clear();
-            commandConfiguration.getSelfClearInventoryCommandMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&', s)));
+            commandConfiguration.getSelfClearInventoryCommandMessage().forEach(s -> sendMessage(player,s));
         }
         if (args.length != 1) {
             if (!commandSender.hasPermission(CommandPermissions.COMMAND_CLEAR_SOMEONE_INVENTORY))return;

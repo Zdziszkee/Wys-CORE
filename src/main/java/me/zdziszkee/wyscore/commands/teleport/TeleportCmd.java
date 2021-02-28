@@ -8,9 +8,10 @@ import lombok.RequiredArgsConstructor;
 import me.zdziszkee.wyscore.configuration.CommandConfiguration;
 import me.zdziszkee.wyscore.permissions.CommandPermissions;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permission;
+
+import static me.zdziszkee.wyscore.utils.MessageUtil.sendMessage;
 
 @RequiredArgsConstructor
 @CommandAlias("tp")
@@ -26,7 +27,7 @@ public class TeleportCmd extends BaseCommand {
         if (from == null || to == null) return;
         if (!from.hasPermission(new Permission(CommandPermissions.BYPASS_TP_PERMISSION))) {
             if (teleportDisabledPlayersManager.isPlayerInPlayersWithBlockedTeleporting(from)||teleportDisabledPlayersManager.isPlayerInPlayersWithBlockedTeleporting(to)){
-                commandConfiguration.getThisPlayerHasDisabledTeleportingMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&', s)));
+                commandConfiguration.getThisPlayerHasDisabledTeleportingMessage().forEach(s -> sendMessage(player,s));
                 return;
             }
         }

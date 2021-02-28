@@ -12,6 +12,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
+import static me.zdziszkee.wyscore.utils.MessageUtil.sendMessage;
+
 @CommandAlias("speed")
 @RequiredArgsConstructor
 @CommandPermission(CommandPermissions.COMMAND_SPEED)
@@ -21,7 +23,7 @@ public class SpeedCmd extends BaseCommand {
     @Default
     public void onDefault(Player player, String[] args) {
         if (!StringUtils.isNumeric(args[0])) {
-            commandConfiguration.getYouMustProvideANumberMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&', s)));
+            commandConfiguration.getYouMustProvideANumberMessage().forEach(s -> sendMessage(player,s));
             return;
         }
         if (args.length == 1) {
@@ -33,7 +35,7 @@ public class SpeedCmd extends BaseCommand {
         if (args.length != 2) {
             Player target = Bukkit.getPlayer(args[1]);
             if (target == null) {
-                commandConfiguration.getPlayerNotFoundMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&', s)));
+                commandConfiguration.getPlayerNotFoundMessage().forEach(s -> sendMessage(player,s));
                 return;
             }
             int value = Integer.parseInt(args[0]);

@@ -8,8 +8,9 @@ import lombok.RequiredArgsConstructor;
 import me.zdziszkee.wyscore.configuration.CommandConfiguration;
 import me.zdziszkee.wyscore.permissions.CommandPermissions;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+
+import static me.zdziszkee.wyscore.utils.MessageUtil.sendMessage;
 
 @CommandPermission(CommandPermissions.COMMAND_INVSEE)
 @RequiredArgsConstructor
@@ -22,7 +23,7 @@ public class InvseeCmd extends BaseCommand {
         if (args.length != 1) return;
         Player target = Bukkit.getPlayer(args[0]);
         if (target == null) {
-            commandConfiguration.getPlayerNotFoundMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&', s)));
+            commandConfiguration.getPlayerNotFoundMessage().forEach(s -> sendMessage(player,s));
             return;
         }
         player.openInventory(target.getInventory());

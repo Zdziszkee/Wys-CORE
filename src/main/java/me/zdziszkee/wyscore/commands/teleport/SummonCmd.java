@@ -12,6 +12,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permission;
 
+import static me.zdziszkee.wyscore.utils.MessageUtil.sendMessage;
+
 @CommandPermission(CommandPermissions.COMMAND_SUMMON)
 @CommandAlias("summon|s")
 @RequiredArgsConstructor
@@ -26,7 +28,7 @@ public class SummonCmd extends BaseCommand {
         if (player == null) return;
         if (!player.hasPermission(new Permission(CommandPermissions.BYPASS_TP_PERMISSION))) {
             if (teleportDisabledPlayersManager.isPlayerInPlayersWithBlockedTeleporting(target)) {
-                commandConfiguration.getThisPlayerHasDisabledTeleportingMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&', s)));
+                commandConfiguration.getThisPlayerHasDisabledTeleportingMessage().forEach(s -> sendMessage(player,s));
                 return;
             }
             target.teleport(player);

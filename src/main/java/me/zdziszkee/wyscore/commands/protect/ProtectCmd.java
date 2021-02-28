@@ -12,6 +12,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import static me.zdziszkee.wyscore.utils.MessageUtil.sendMessage;
+
 @RequiredArgsConstructor
 @CommandAlias("protect")
 public class ProtectCmd extends BaseCommand {
@@ -26,10 +28,10 @@ public class ProtectCmd extends BaseCommand {
             Player player = (Player) commandSender;
             if (protectedPlayersManager.isPlayerInProtectedPlayers(player)) {
                 protectedPlayersManager.removePlayerFromProtectedPlayers(player);
-                commandConfiguration.getProtectCommandDisableMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&', s)));
+                commandConfiguration.getProtectCommandDisableMessage().forEach(s -> sendMessage(player,s));
             } else {
                 protectedPlayersManager.addPlayerToProtectedPlayers(player);
-                commandConfiguration.getProtectCommandEnableMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&', s)));
+                commandConfiguration.getProtectCommandEnableMessage().forEach(s -> sendMessage(player,s));
             }
 
         }
@@ -40,10 +42,10 @@ public class ProtectCmd extends BaseCommand {
             if (player == null) return;
             if (protectedPlayersManager.isPlayerInProtectedPlayers(player)) {
                 protectedPlayersManager.removePlayerFromProtectedPlayers(player);
-                commandConfiguration.getProtectCommandDisableMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&', s)));
+                commandConfiguration.getProtectCommandDisableMessage().forEach(s -> sendMessage(player,s));
             } else {
                 protectedPlayersManager.addPlayerToProtectedPlayers(player);
-                commandConfiguration.getProtectCommandEnableMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&', s)));
+                commandConfiguration.getProtectCommandEnableMessage().forEach(s -> sendMessage(player,s));
             }
         }
     }

@@ -8,6 +8,8 @@ import me.zdziszkee.wyscore.configuration.CommandConfiguration;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
+import static me.zdziszkee.wyscore.utils.MessageUtil.sendMessage;
+
 @RequiredArgsConstructor
 @CommandAlias("help")
 public class HelpCmd extends BaseCommand {
@@ -15,6 +17,6 @@ public class HelpCmd extends BaseCommand {
 
     @Default
     public void onDefault(Player player) {
-        commandConfiguration.getHelpCommandMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&', s)));
+        commandConfiguration.getHelpCommandMessage().forEach(s -> sendMessage(player,s));
     }
 }

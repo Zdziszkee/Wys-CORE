@@ -8,6 +8,8 @@ import me.zdziszkee.wyscore.configuration.CommandConfiguration;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
+import static me.zdziszkee.wyscore.utils.MessageUtil.sendMessage;
+
 
 @RequiredArgsConstructor
 @CommandAlias("about|?")
@@ -16,6 +18,6 @@ public class AboutCmd extends BaseCommand {
 
     @Default
     public void onDefault(Player player) {
-        commandConfiguration.getAboutCommandMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&', s)));
+        commandConfiguration.getAboutCommandMessage().forEach(s -> sendMessage(player,s));
     }
 }
