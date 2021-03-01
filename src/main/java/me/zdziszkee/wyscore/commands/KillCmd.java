@@ -12,6 +12,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import static me.zdziszkee.wyscore.utils.MessageUtil.sendMessage;
+
 @RequiredArgsConstructor
 @CommandAlias("kill")
 public class KillCmd extends BaseCommand {
@@ -29,7 +31,7 @@ public class KillCmd extends BaseCommand {
             if (!commandSender.hasPermission(CommandPermissions.COMMAND_KILL_SOMEONE))return;
             Player target = Bukkit.getPlayer(args[0]);
             if (target == null) {
-                commandConfiguration.getPlayerNotFoundMessage().forEach(s -> commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', s)));
+                commandConfiguration.getPlayerNotFoundMessage().forEach(s -> sendMessage(commandSender,s));
                 return;
             }
             target.setHealth(0);

@@ -12,6 +12,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
+import static me.zdziszkee.wyscore.utils.MessageUtil.sendMessage;
+
 @CommandAlias("ping")
 @RequiredArgsConstructor
 public class PingCommand extends BaseCommand {
@@ -24,16 +26,16 @@ public class PingCommand extends BaseCommand {
             if (!(commandSender instanceof Player)) return;
             Player player = (Player) commandSender;
             int ping = ((CraftPlayer) (player)).getHandle().ping;
-            commandConfiguration.getPingCommandMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&', s.replace(Placeholders.AMOUNT, String.valueOf(ping)))));
+            commandConfiguration.getPingCommandMessage().forEach(s -> sendMessage(player,s.replace(Placeholders.AMOUNT, String.valueOf(ping))));
         }
         if (args.length == 1) {
             Player player = Bukkit.getPlayer(args[0]);
             if (player == null) {
-                commandConfiguration.getPlayerNotFoundMessage().forEach(s -> commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', s)));
+                commandConfiguration.getPlayerNotFoundMessage().forEach(s -> sendMessage(player,s));
                 return;
             }
             int ping = ((CraftPlayer) (player)).getHandle().ping;
-            commandConfiguration.getPingCommandMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&', s.replace(Placeholders.AMOUNT, String.valueOf(ping)))));
+            commandConfiguration.getPingCommandMessage().forEach(s -> sendMessage(player,s.replace(Placeholders.AMOUNT, String.valueOf(ping))));
         }
     }
 }

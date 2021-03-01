@@ -14,6 +14,8 @@ import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.inventory.ItemStack;
 
+import static me.zdziszkee.wyscore.utils.MessageUtil.sendMessage;
+
 @RequiredArgsConstructor
 @CommandPermission(CommandPermissions.COMMAND_GIVE)
 @CommandAlias("giveall")
@@ -25,7 +27,7 @@ public class GiveAllCmd extends BaseCommand {
         if (args.length != 1) return;
         Material material = Material.getMaterial(args[0]);
         if (material == null) {
-            commandConfiguration.getInvalidMaterialMessage().forEach(s -> commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', s).replace(Placeholders.MATERIAL, args[0])));
+            commandConfiguration.getInvalidMaterialMessage().forEach(s ->  sendMessage(commandSender,s.replace(Placeholders.MATERIAL, args[0])));
 
             return;
         }

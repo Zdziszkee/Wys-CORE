@@ -12,6 +12,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import static me.zdziszkee.wyscore.utils.MessageUtil.sendMessage;
+
 @RequiredArgsConstructor
 @CommandAlias("heal")
 @CommandPermission(CommandPermissions.COMMAND_HEAL)
@@ -30,7 +32,7 @@ public class HealCmd extends BaseCommand {
             if (!commandSender.hasPermission(CommandPermissions.COMMAND_HEAL_SOMEONE))return;
             Player target = Bukkit.getPlayer(args[0]);
             if (target == null) {
-                commandConfiguration.getPlayerNotFoundMessage().forEach(s -> commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', s)));
+                commandConfiguration.getPlayerNotFoundMessage().forEach(s -> sendMessage(commandSender,s));
                 return;
             }
             target.setHealth(target.getMaxHealth());

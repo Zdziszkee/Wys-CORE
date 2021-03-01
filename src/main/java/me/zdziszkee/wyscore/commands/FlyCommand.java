@@ -12,6 +12,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import static me.zdziszkee.wyscore.utils.MessageUtil.sendMessage;
+
 @RequiredArgsConstructor
 @CommandAlias("fly")
 public class FlyCommand extends BaseCommand {
@@ -29,7 +31,7 @@ public class FlyCommand extends BaseCommand {
             if (!commandSender.hasPermission(CommandPermissions.COMMAND_GIVE_FLY))return;
             Player player = Bukkit.getPlayer(args[0]);
             if (player == null) {
-                commandConfiguration.getPlayerNotFoundMessage().forEach(s -> commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', s)));
+                commandConfiguration.getPlayerNotFoundMessage().forEach(s -> sendMessage(commandSender,s));
                 return;
             }
             player.setAllowFlight(player.getAllowFlight());

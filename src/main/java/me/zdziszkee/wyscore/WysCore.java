@@ -14,7 +14,9 @@ import me.zdziszkee.wyscore.commands.protect.ProtectedPlayersManager;
 import me.zdziszkee.wyscore.commands.teleport.*;
 import me.zdziszkee.wyscore.configuration.CommandConfiguration;
 import me.zdziszkee.wyscore.configuration.GeneralConfiguration;
+import me.zdziszkee.wyscore.database.service.CurrencyService;
 import me.zdziszkee.wyscore.database.MongoDB;
+import me.zdziszkee.wyscore.database.service.PlayerService;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -25,6 +27,8 @@ public class WysCore extends JavaPlugin {
     private CommandConfiguration commandConfiguration;
     private GeneralConfiguration generalConfiguration;
     private MongoDB mongoDB;
+    private CurrencyService currencyService;
+    private PlayerService playerService;
     @Override
     public void onEnable() {
         SimpleJSONConfig.INSTANCE.register(this);
@@ -35,6 +39,7 @@ public class WysCore extends JavaPlugin {
         registerEvents();
         mongoDB = new MongoDB(generalConfiguration.getMongoURI(),generalConfiguration.getMongoDatabaseName());
         mongoDB.connect();
+       currencyService = new CurrencyService(mongoDB.getCurrencyCollection());
     }
 
     @Override
@@ -82,4 +87,11 @@ public class WysCore extends JavaPlugin {
         paperCommandManager.registerCommand(new WhereAmICmd(commandConfiguration));
     }
 
+    public CurrencyService getCurrencyService() {
+        return currencyService;
+    }
+
+    public PlayerService getPlayerService() {
+        return playerService;
+    }
 }

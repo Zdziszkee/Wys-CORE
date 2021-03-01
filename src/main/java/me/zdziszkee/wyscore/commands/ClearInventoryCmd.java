@@ -33,11 +33,11 @@ public class ClearInventoryCmd extends BaseCommand {
             if (!commandSender.hasPermission(CommandPermissions.COMMAND_CLEAR_SOMEONE_INVENTORY))return;
             Player target = Bukkit.getPlayer(args[0]);
             if (target == null) {
-                commandConfiguration.getPlayerNotFoundMessage().forEach(s -> commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', s)));
+                commandConfiguration.getPlayerNotFoundMessage().forEach(s -> sendMessage(commandSender,s));
                 return;
             }
             target.getInventory().clear();
-            commandConfiguration.getClearInventoryCommandMessage().forEach(s -> target.sendMessage(ChatColor.translateAlternateColorCodes('&', s)));
+            commandConfiguration.getClearInventoryCommandMessage().forEach(s -> sendMessage(commandSender,s));
 
         }
     }

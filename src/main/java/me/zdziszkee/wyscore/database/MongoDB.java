@@ -12,6 +12,7 @@ public class MongoDB {
     private final String databaseURI;
     private final String dataBaseName;
     MongoCollection<Document> currencyCollection;
+    MongoCollection<Document> playerCollection;
     public MongoDB(String databaseURI, String dataBaseName) {
         this.databaseURI = databaseURI;
         this.dataBaseName = dataBaseName;
@@ -21,6 +22,7 @@ public class MongoDB {
         MongoClient mongoClient = MongoClients.create(databaseURI);
         MongoDatabase mongoDatabase = mongoClient.getDatabase(dataBaseName);
         currencyCollection = mongoDatabase.getCollection("currency");
+        playerCollection = mongoDatabase.getCollection("playerCollection");
         Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Connected to mongodb!");
     }
 

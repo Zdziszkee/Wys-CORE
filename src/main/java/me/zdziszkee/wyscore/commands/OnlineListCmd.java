@@ -10,6 +10,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
+import static me.zdziszkee.wyscore.utils.MessageUtil.sendMessage;
+
 @CommandAlias("list|online")
 @RequiredArgsConstructor
 public class OnlineListCmd extends BaseCommand {
@@ -18,6 +20,6 @@ public class OnlineListCmd extends BaseCommand {
     @Default
     public void onDefault(CommandSender commandSender) {
         int amount = Bukkit.getOnlinePlayers().size();
-        commandConfiguration.getOnlineCommandMessage().forEach(s -> commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', s.replace(Placeholders.AMOUNT, String.valueOf(amount)))));
+        commandConfiguration.getOnlineCommandMessage().forEach(s -> sendMessage(commandSender,s.replace(Placeholders.AMOUNT, String.valueOf(amount))));
     }
 }

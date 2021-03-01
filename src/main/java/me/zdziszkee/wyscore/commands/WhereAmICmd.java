@@ -9,6 +9,8 @@ import me.zdziszkee.wyscore.utils.Placeholders;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
+import static me.zdziszkee.wyscore.utils.MessageUtil.sendMessage;
+
 @RequiredArgsConstructor
 @CommandAlias("whereami")
 public class WhereAmICmd extends BaseCommand {
@@ -16,6 +18,6 @@ public class WhereAmICmd extends BaseCommand {
 
     @Default
     public void onDefault(Player player) {
-        commandConfiguration.getWhereAmICommandMessage().forEach(s -> player.sendMessage(ChatColor.translateAlternateColorCodes('&', s.replace(Placeholders.SERVER, player.getServer().getServerName()))));
+        commandConfiguration.getWhereAmICommandMessage().forEach(s -> sendMessage(player,s.replace(Placeholders.SERVER, player.getServer().getServerName())));
     }
 }

@@ -15,6 +15,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import static me.zdziszkee.wyscore.utils.MessageUtil.sendMessage;
+
 @RequiredArgsConstructor
 @CommandAlias("give")
 @CommandPermission(CommandPermissions.COMMAND_GIVE)
@@ -26,11 +28,11 @@ public class GiveCmd extends BaseCommand {
         Player player = Bukkit.getPlayer(args[0]);
         Material material = Material.getMaterial(args[1]);
         if (player == null) {
-            commandConfiguration.getPlayerNotFoundMessage().forEach(s -> commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', s)));
+            commandConfiguration.getPlayerNotFoundMessage().forEach(s -> sendMessage(commandSender,s));
             return;
         }
         if (material == null) {
-            commandConfiguration.getInvalidMaterialMessage().forEach(s -> commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', s).replace(Placeholders.MATERIAL,args[1])));
+            commandConfiguration.getInvalidMaterialMessage().forEach(s -> sendMessage(commandSender,s.replace(Placeholders.MATERIAL,args[1])));
             return;
         }
         player.getInventory().addItem(new ItemStack(material));
