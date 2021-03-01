@@ -34,6 +34,10 @@ public class PlayerService {
         first.remove("player");
         return gson.fromJson(first.toJson(),PlayerData.class);
     }
+    public void delete(UUID uuid){
+        Document document = new Document("player", uuid);
+        playerCollection.deleteOne(document);
+    }
 
     @Getter
     @RequiredArgsConstructor
@@ -41,6 +45,7 @@ public class PlayerService {
         private LocalDate firstJoinTime;
         private long onlineTimeInSeconds;
         private boolean isBoy;
+        private boolean isAuthorizationComplete;
 
     }
 }

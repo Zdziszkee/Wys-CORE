@@ -29,7 +29,7 @@ public class ClearInventoryCmd extends BaseCommand {
             player.getInventory().clear();
             commandConfiguration.getSelfClearInventoryCommandMessage().forEach(s -> sendMessage(player,s));
         }
-        if (args.length != 1) {
+        if (args.length == 1) {
             if (!commandSender.hasPermission(CommandPermissions.COMMAND_CLEAR_SOMEONE_INVENTORY))return;
             Player target = Bukkit.getPlayer(args[0]);
             if (target == null) {
@@ -38,6 +38,7 @@ public class ClearInventoryCmd extends BaseCommand {
             }
             target.getInventory().clear();
             commandConfiguration.getClearInventoryCommandMessage().forEach(s -> sendMessage(commandSender,s));
+            commandConfiguration.getSelfClearInventoryCommandMessage().forEach(s -> sendMessage(target,s));
 
         }
     }

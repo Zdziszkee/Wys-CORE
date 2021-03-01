@@ -12,11 +12,14 @@ import me.zdziszkee.wyscore.commands.protect.ProtectCmd;
 import me.zdziszkee.wyscore.commands.protect.ProtectedPlayerDamageListener;
 import me.zdziszkee.wyscore.commands.protect.ProtectedPlayersManager;
 import me.zdziszkee.wyscore.commands.teleport.*;
+import me.zdziszkee.wyscore.commands.vanish.VanishCmd;
+import me.zdziszkee.wyscore.commands.vanish.VanishedPlayersManager;
 import me.zdziszkee.wyscore.configuration.CommandConfiguration;
 import me.zdziszkee.wyscore.configuration.GeneralConfiguration;
 import me.zdziszkee.wyscore.database.service.CurrencyService;
 import me.zdziszkee.wyscore.database.MongoDB;
 import me.zdziszkee.wyscore.database.service.PlayerService;
+import me.zdziszkee.wyscore.listeners.PlayerJoinListener;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -29,8 +32,11 @@ public class WysCore extends JavaPlugin {
     private MongoDB mongoDB;
     private CurrencyService currencyService;
     private PlayerService playerService;
+    private final VanishedPlayersManager vanishedPlayersManager = new VanishedPlayersManager();
+    private static WysCore wysCore;
     @Override
     public void onEnable() {
+        wysCore=this;
         SimpleJSONConfig.INSTANCE.register(this);
         commandConfiguration = Config.getConfig(CommandConfiguration.class);
         generalConfiguration = Config.getConfig(GeneralConfiguration.class);
@@ -52,6 +58,7 @@ public class WysCore extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new BuildListener(buildCommandManager), this);
         Bukkit.getPluginManager().registerEvents(new ProtectedPlayerDamageListener(protectedPlayersManager), this);
         Bukkit.getPluginManager().registerEvents(new CommandPreProcessListener(), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(vanishedPlayersManager),this);
 
     }
 
@@ -83,8 +90,12 @@ public class WysCore extends JavaPlugin {
         paperCommandManager.registerCommand(new ShopCommand(commandConfiguration));
         paperCommandManager.registerCommand(new SpeedCmd(commandConfiguration));
         paperCommandManager.registerCommand(new TimeRestartCmd(this, commandConfiguration));
-        paperCommandManager.registerCommand(new VanishCmd());
+        paperCommandManager.registerCommand(new VanishCmd(commandConfiguration,vanishedPlayersManager));
         paperCommandManager.registerCommand(new WhereAmICmd(commandConfiguration));
+    }
+
+    public static WysCore getInstance() {
+        return wysCore;
     }
 
     public CurrencyService getCurrencyService() {

@@ -26,6 +26,12 @@ public class CommandConfiguration extends Config {
     private final List<String> pingCommandMessage = Collections.singletonList("This player ping is %amount%");
     private final List<String> protectCommandDisableMessage = Collections.singletonList("You are no longer protected!");
     private final List<String> protectCommandEnableMessage = Collections.singletonList("You are protected!");
+    private final List<String> protectSomeoneCommandDisableMessage = Collections.singletonList("%player% is no longer protected!");
+    private final List<String> protectSomeoneEnableMessage = Collections.singletonList("%player% is protected!");
+    private final List<String> selfFlyEnableCommandMessage = Collections.singletonList("Fly has been enabled!");
+    private final List<String> selfFlyDisableCommandMessage = Collections.singletonList("Fly has been disabled!");
+    private final List<String> someoneFlyEnableCommandMessage = Collections.singletonList("%player%'s fly has been enabled");
+    private final List<String> someoneFlyDisableCommandMessage = Collections.singletonList("%player%'s fly has been disabled");
     private final List<String> shopCommandMessage = Collections.singletonList("you stuff there!");
     private final List<String> serverRestartCommandMessage = Collections.singletonList("Restarting in %amount%!");
     private final List<String> whereAmICommandMessage = Collections.singletonList("Your are on %server%!");
@@ -35,6 +41,16 @@ public class CommandConfiguration extends Config {
     private final List<String> teleportingEnabledMessage = Collections.singletonList("Teleporting of %player% has been enabled");
     private final List<String> teleportingDisabledMessage = Collections.singletonList("Teleporting of %player% has been disabled");
     private final List<String> youMustProvideANumberMessage = Collections.singletonList("You must provide a number!");
-    private final List<String> invalidMaterialMessage = Collections.singletonList("%input% is not a valid material");
+    private final List<String> invalidMaterialMessage = Collections.singletonList("%material% is not a valid material");
+    private final List<String> selfHealCommandMessage = Collections.singletonList("healed!");
+    private final List<String> someoneHealCommandMessage = Collections.singletonList("%player% has been healed!");
+    private final List<String> selfVanishEnableCommandMessage = Collections.singletonList("Vanish has been enabled!");
+    private final List<String> selfVanishDisableCommandMessage = Collections.singletonList("Vanish has been disabled!");
+    private final List<String> someoneVanishEnableCommandMessage = Collections.singletonList("%player%'s vanish has been enabled!");
+    private final List<String> someoneVanishDisableCommandMessage = Collections.singletonList("%player%'s vanish has been disabled!");
+    private final List<String> selfKillCommandMessage = Collections.singletonList("You killed yourself");
+    private final List<String> someoneKillCommandMessage = Collections.singletonList("%player% has been killed");
+    private final List<String> summonCommandMessage = Collections.singletonList("%player% has been summoned");
+    private final List<String> teleportCommandMessage = Collections.singletonList("%player% has been teleported to %target%");
 
 }

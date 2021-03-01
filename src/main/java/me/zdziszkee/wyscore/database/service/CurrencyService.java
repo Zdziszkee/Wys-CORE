@@ -33,5 +33,9 @@ public class CurrencyService {
         first.remove("player");
         return gson.fromJson(first.toJson(), CurrencyPack.class);
     }
+    public void delete(UUID uuid){
+        Document document = new Document("player", uuid);
+        currencyCollection.deleteOne(document);
+    }
 
 }

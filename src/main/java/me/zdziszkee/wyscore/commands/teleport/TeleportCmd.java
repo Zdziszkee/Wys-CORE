@@ -7,6 +7,7 @@ import co.aikar.commands.annotation.Default;
 import lombok.RequiredArgsConstructor;
 import me.zdziszkee.wyscore.configuration.CommandConfiguration;
 import me.zdziszkee.wyscore.permissions.CommandPermissions;
+import me.zdziszkee.wyscore.utils.Placeholders;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permission;
@@ -31,7 +32,7 @@ public class TeleportCmd extends BaseCommand {
                 return;
             }
         }
-
+        commandConfiguration.getTeleportCommandMessage().forEach(s -> sendMessage(player,s.replace(Placeholders.PLAYER,from.getName()).replace("%target%",to.getName())));
         from.teleport(to);
     }
 }

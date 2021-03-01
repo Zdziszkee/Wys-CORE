@@ -7,6 +7,7 @@ import co.aikar.commands.annotation.Default;
 import lombok.RequiredArgsConstructor;
 import me.zdziszkee.wyscore.configuration.CommandConfiguration;
 import me.zdziszkee.wyscore.permissions.CommandPermissions;
+import me.zdziszkee.wyscore.utils.Placeholders;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -26,6 +27,7 @@ public class KillCmd extends BaseCommand {
             if(!(commandSender instanceof Player))return;
             Player player = (Player) commandSender;
             player.setHealth(0);
+            commandConfiguration.getSelfKillCommandMessage().forEach(s -> sendMessage(player,s));
         }
         if (args.length == 1) {
             if (!commandSender.hasPermission(CommandPermissions.COMMAND_KILL_SOMEONE))return;
@@ -35,6 +37,8 @@ public class KillCmd extends BaseCommand {
                 return;
             }
             target.setHealth(0);
+            commandConfiguration.getSomeoneKillCommandMessage().forEach(s -> sendMessage(commandSender,s.replace(Placeholders.PLAYER,target.getName())));
+
         }
     }
 

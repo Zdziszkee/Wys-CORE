@@ -7,6 +7,7 @@ import co.aikar.commands.annotation.Default;
 import lombok.RequiredArgsConstructor;
 import me.zdziszkee.wyscore.configuration.CommandConfiguration;
 import me.zdziszkee.wyscore.permissions.CommandPermissions;
+import me.zdziszkee.wyscore.utils.Placeholders;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -28,12 +29,14 @@ public class SummonCmd extends BaseCommand {
         if (player == null) return;
         if (!player.hasPermission(new Permission(CommandPermissions.BYPASS_TP_PERMISSION))) {
             if (teleportDisabledPlayersManager.isPlayerInPlayersWithBlockedTeleporting(target)) {
-                commandConfiguration.getThisPlayerHasDisabledTeleportingMessage().forEach(s -> sendMessage(player,s));
+                commandConfiguration.getThisPlayerHasDisabledTeleportingMessage().forEach(s -> sendMessage(player, s));
                 return;
             }
+            commandConfiguration.getSummonCommandMessage().forEach(s -> sendMessage(player, s.replace(Placeholders.PLAYER, target.getName())));
             target.teleport(player);
             return;
         }
+        commandConfiguration.getSummonCommandMessage().forEach(s -> sendMessage(player, s.replace(Placeholders.PLAYER, target.getName())));
         target.teleport(player);
     }
 }

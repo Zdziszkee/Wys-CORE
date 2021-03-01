@@ -31,7 +31,7 @@ public class PingCommand extends BaseCommand {
         if (args.length == 1) {
             Player player = Bukkit.getPlayer(args[0]);
             if (player == null) {
-                commandConfiguration.getPlayerNotFoundMessage().forEach(s -> sendMessage(player,s));
+                commandConfiguration.getPlayerNotFoundMessage().forEach(s -> sendMessage(commandSender,s));
                 return;
             }
             int ping = ((CraftPlayer) (player)).getHandle().ping;

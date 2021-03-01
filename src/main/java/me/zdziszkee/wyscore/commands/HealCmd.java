@@ -7,6 +7,7 @@ import co.aikar.commands.annotation.Default;
 import lombok.RequiredArgsConstructor;
 import me.zdziszkee.wyscore.configuration.CommandConfiguration;
 import me.zdziszkee.wyscore.permissions.CommandPermissions;
+import me.zdziszkee.wyscore.utils.Placeholders;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -26,7 +27,7 @@ public class HealCmd extends BaseCommand {
             if (!(commandSender instanceof Player)) return;
             Player player = (Player) commandSender;
             player.setHealth(player.getMaxHealth());
-
+            commandConfiguration.getSelfHealCommandMessage().forEach(s -> sendMessage(commandSender,s));
         }
         if (args.length == 1) {
             if (!commandSender.hasPermission(CommandPermissions.COMMAND_HEAL_SOMEONE))return;
@@ -36,6 +37,8 @@ public class HealCmd extends BaseCommand {
                 return;
             }
             target.setHealth(target.getMaxHealth());
+            commandConfiguration.getSelfHealCommandMessage().forEach(s -> sendMessage(target,s));
+            commandConfiguration.getSomeoneHealCommandMessage().forEach(s -> sendMessage(commandSender,s.replace(Placeholders.PLAYER,target.getName())));
         }
     }
 }

@@ -19,33 +19,39 @@ import static me.zdziszkee.wyscore.utils.MessageUtil.sendMessage;
 public class TeleportToggleCmd extends BaseCommand {
     private final TeleportDisabledPlayersManager teleportDisabledPlayersManager;
     private final CommandConfiguration commandConfiguration;
+
     @Default
     @CommandPermission(CommandPermissions.COMMAND_SELF_TP_TOGGLE)
     public void onDefault(Player player) {
 
         if (teleportDisabledPlayersManager.isPlayerInPlayersWithBlockedTeleporting(player)) {
             teleportDisabledPlayersManager.removePlayerFromPlayersWithBlockedTeleporting(player);
-            commandConfiguration.getSelfTeleportingDisabledMessage().forEach(s -> sendMessage(player,s));
+            commandConfiguration.getSelfTeleportingDisabledMessage().forEach(s -> sendMessage(player, s));
         } else {
             teleportDisabledPlayersManager.addPlayerToPlayersWithBlockedTeleporting(player);
-            commandConfiguration.getSelfTeleportingEnabledMessage().forEach(s -> sendMessage(player,s));
+            commandConfiguration.getSelfTeleportingEnabledMessage().forEach(s -> sendMessage(player, s));
 
         }
     }
 
     @Default
     @CommandPermission(CommandPermissions.COMMAND_TP_TOGGLE)
-    public void onDefault(Player player,String[] args) {
+    public void onDefault(Player player, String[] args) {
         if (args.length != 1) return;
         Player target = Bukkit.getPlayer(args[0]);
-        if (target == null) return;
+        if (target == null) {
+            commandConfiguration.getPlayerNotFoundMessage().forEach(s -> sendMessage(player,s));
+            return;
+        }
         if (teleportDisabledPlayersManager.isPlayerInPlayersWithBlockedTeleporting(target)) {
             teleportDisabledPlayersManager.removePlayerFromPlayersWithBlockedTeleporting(target);
-            commandConfiguration.getTeleportingDisabledMessage().forEach(s -> sendMessage(player,s.replace(Placeholders.PLAYER,target.getName())));
+            commandConfiguration.getTeleportingDisabledMessage().forEach(s -> sendMessage(player, s.replace(Placeholders.PLAYER, target.getName())));
+            commandConfiguration.getSelfTeleportingDisabledMessage().forEach(s -> sendMessage(target, s));
 
         } else {
             teleportDisabledPlayersManager.addPlayerToPlayersWithBlockedTeleporting(target);
-            commandConfiguration.getTeleportingEnabledMessage().forEach(s -> sendMessage(player,s.replace(Placeholders.PLAYER,target.getName())));
+            commandConfiguration.getTeleportingEnabledMessage().forEach(s -> sendMessage(player, s.replace(Placeholders.PLAYER, target.getName())));
+            commandConfiguration.getSelfTeleportingEnabledMessage().forEach(s -> sendMessage(target, s));
 
         }
     }
