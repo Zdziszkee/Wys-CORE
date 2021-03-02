@@ -1,6 +1,6 @@
 name: WysCore
-main: me.zdziszkee.wyscore.WysCore
+main: me.twodevvstudio.wyscore.WysCore
 version: 1.0
-author: Zdziszkee
+author: TwoDevsstudio
 depend:
   - SimpleJsonConfig
