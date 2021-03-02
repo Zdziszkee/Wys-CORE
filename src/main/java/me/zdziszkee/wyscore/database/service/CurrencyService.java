@@ -15,18 +15,18 @@ public class CurrencyService {
     private final Gson gson = new Gson();
 
     public void save(UUID uuid, CurrencyPack currencyPack) {
-        Document document = Document.parse(gson.toJson(currencyPack)).append("player", uuid);
+        Document document = Document.parse(gson.toJson(currencyPack)).append("player", uuid.toString());
         currencyCollection.insertOne(document);
     }
 
     public void update(UUID uuid, CurrencyPack currencyPack) {
-        Document document = Document.parse(gson.toJson(currencyPack)).append("player", uuid);
-        Document target = new Document("player",uuid);
+        Document document = Document.parse(gson.toJson(currencyPack)).append("player", uuid.toString());
+        Document target = new Document("player",uuid.toString());
         currencyCollection.updateOne(target,document);
     }
 
     public CurrencyPack findByUUID(UUID uuid) {
-        Document document = new Document("player", uuid);
+        Document document = new Document("player", uuid.toString());
         FindIterable<Document> documents = currencyCollection.find(document);
         Document first = documents.first();
         if (first == null) return null;
@@ -34,7 +34,7 @@ public class CurrencyService {
         return gson.fromJson(first.toJson(), CurrencyPack.class);
     }
     public void delete(UUID uuid){
-        Document document = new Document("player", uuid);
+        Document document = new Document("player", uuid.toString());
         currencyCollection.deleteOne(document);
     }
 

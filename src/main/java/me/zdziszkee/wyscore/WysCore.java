@@ -20,6 +20,8 @@ import me.zdziszkee.wyscore.database.service.CurrencyService;
 import me.zdziszkee.wyscore.database.MongoDB;
 import me.zdziszkee.wyscore.database.service.PlayerService;
 import me.zdziszkee.wyscore.listeners.PlayerJoinListener;
+import me.zdziszkee.wyscore.listeners.PlayerQuitListener;
+import me.zdziszkee.wyscore.time.PlayerJoinTimeManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -34,6 +36,7 @@ public class WysCore extends JavaPlugin {
     private PlayerService playerService;
     private final VanishedPlayersManager vanishedPlayersManager = new VanishedPlayersManager();
     private static WysCore wysCore;
+    private final PlayerJoinTimeManager playerJoinTimeManager = new PlayerJoinTimeManager();
     @Override
     public void onEnable() {
         wysCore=this;
@@ -41,11 +44,12 @@ public class WysCore extends JavaPlugin {
         commandConfiguration = Config.getConfig(CommandConfiguration.class);
         generalConfiguration = Config.getConfig(GeneralConfiguration.class);
         Bukkit.broadcastMessage("Wys-CORE has been enabled!");
+        mongoDB = new MongoDB(generalConfiguration);
+        mongoDB.connect();
+        playerService= new PlayerService(mongoDB.getPlayerCollection());
+        currencyService = new CurrencyService(mongoDB.getCurrencyCollection());
         registerCommands();
         registerEvents();
-        mongoDB = new MongoDB(generalConfiguration.getMongoURI(),generalConfiguration.getMongoDatabaseName());
-        mongoDB.connect();
-       currencyService = new CurrencyService(mongoDB.getCurrencyCollection());
     }
 
     @Override
@@ -58,7 +62,8 @@ public class WysCore extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new BuildListener(buildCommandManager), this);
         Bukkit.getPluginManager().registerEvents(new ProtectedPlayerDamageListener(protectedPlayersManager), this);
         Bukkit.getPluginManager().registerEvents(new CommandPreProcessListener(), this);
-        Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(vanishedPlayersManager),this);
+        Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(vanishedPlayersManager,generalConfiguration,playerJoinTimeManager),this);
+        Bukkit.getPluginManager().registerEvents(new PlayerQuitListener(playerJoinTimeManager,playerService),this);
 
     }
 

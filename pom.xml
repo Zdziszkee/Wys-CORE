@@ -49,8 +49,8 @@
         <dependency>
             <groupId>com.github.slighterr12</groupId>
             <artifactId>SimpleJSONConfig</artifactId>
-            <version>32e62403f6</version>
-            <scope>compile</scope>
+            <version>732225f</version>
+            <scope>provided</scope>
         </dependency>
             <dependency>
                 <groupId>org.mongodb</groupId>
