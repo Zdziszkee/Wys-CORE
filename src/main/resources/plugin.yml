@@ -1,5 +1,5 @@
 name: WysCore
-main: me.twodevvstudio.wyscore.WysCore
+main: com.twodevsstudio.wyscore.WysCore
 version: 1.0
 author: TwoDevsstudio
 depend:
