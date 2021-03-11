@@ -14,7 +14,7 @@ import static com.twodevsstudio.wyscore.utils.MessageUtil.sendMessage;
 @CommandAlias("list|online")
 @RequiredArgsConstructor
 public class OnlineListCmd extends BaseCommand {
-    private CommandConfiguration commandConfiguration;
+    private final CommandConfiguration commandConfiguration;
 
     @Default
     public void onDefault(CommandSender commandSender) {

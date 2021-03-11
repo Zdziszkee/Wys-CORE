@@ -13,19 +13,30 @@ import org.apache.commons.lang3.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
-@CommandAlias("trestart|timerestart")
-@CommandPermission(CommandPermissions.COMMAND_TIME_RESTART)
+@CommandAlias( "trestart|timerestart" )
+@CommandPermission( CommandPermissions.COMMAND_TIME_RESTART )
 @RequiredArgsConstructor
 public class TimeRestartCmd extends BaseCommand {
     private final WysCore wysCORE;
     private final CommandConfiguration commandConfiguration;
-
+    
     @Default
     public void onDefault(String[] args) {
-        if (args.length != 1) return;
-        if (!StringUtils.isNumeric(args[0])) return;
+    
+        if (args.length != 1) {
+            return;
+        }
+        if (!StringUtils.isNumeric(args[0])) {
+            return;
+        }
         int time = Integer.parseInt(args[0]);
-        commandConfiguration.getServerRestartCommandMessage().forEach(s -> Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', s.replace(Placeholders.AMOUNT, String.valueOf(time)))));
-        Bukkit.getScheduler().runTaskLater(wysCORE, Bukkit::shutdown, time * 20L);
+        commandConfiguration.getServerRestartCommandMessage()
+                .forEach(s -> Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
+                        s.replace(Placeholders.AMOUNT, String.valueOf(time))
+                )));
+        Bukkit.getScheduler().runTaskLater(wysCORE, () -> {
+            
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "restart");
+        }, time * 20L);
     }
 }

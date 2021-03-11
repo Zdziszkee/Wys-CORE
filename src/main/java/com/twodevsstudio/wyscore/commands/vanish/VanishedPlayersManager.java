@@ -16,12 +16,12 @@ public class VanishedPlayersManager {
     public void addVanishedPlayer(UUID uuid){
         vanishedPlayers.add(uuid);
         Player target = Bukkit.getPlayer(uuid);
-        Bukkit.getOnlinePlayers().forEach(target::hidePlayer);
+        Bukkit.getOnlinePlayers().forEach(player -> player.hidePlayer(target));
     }
     public void removeVanishedPlayer(UUID uuid){
         vanishedPlayers.remove(uuid);
         Player target = Bukkit.getPlayer(uuid);
-        Bukkit.getOnlinePlayers().forEach(target::showPlayer);
+        Bukkit.getOnlinePlayers().forEach(player -> player.hidePlayer(target));
     }
     public void addPlayerToHide(Player playerToHide){
         vanishedPlayers.forEach(uuid -> {

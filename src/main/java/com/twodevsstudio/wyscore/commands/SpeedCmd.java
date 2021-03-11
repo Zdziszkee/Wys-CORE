@@ -18,7 +18,7 @@ import static com.twodevsstudio.wyscore.utils.MessageUtil.sendMessage;
 @CommandPermission(CommandPermissions.COMMAND_SPEED)
 public class SpeedCmd extends BaseCommand {
     private final CommandConfiguration commandConfiguration;
-
+    
     @Default
     public void onDefault(Player player, String[] args) {
         if (!StringUtils.isNumeric(args[0])) {
